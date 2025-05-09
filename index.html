@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telessaúde Missionária: Cuidado e Esperança</title>
+    <!-- <link rel="icon" href="favicon.ico"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> -->
+    <style>
+        /* Estilo Inspirado no MSF */
+        :root {
+            --color-primary-red: #D10000;
+            --color-primary-red-hover: #A80000;
+            --color-text-dark: #1A1A1A;
+            --color-text-medium: #555555;
+            --color-text-light: #FFFFFF;
+            --color-background-white: #FFFFFF;
+            --color-background-light-gray: #F2F2F2;
+            --color-border-light: #E0E0E0;
+            --color-footer-bg: #1A1A1A;
+            --color-footer-text: #CCCCCC;
+            --color-whatsapp-btn: #25D366;
+            --color-whatsapp-btn-hover: #1DAE54;
+            --color-biblioteca-bg: var(--color-background-light-gray);
+            --color-biblioteca-btn: var(--color-primary-red);
+            --color-biblioteca-btn-hover: var(--color-primary-red-hover);
+        }
+
+        /* Reset Básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-medium);
+            background-color: var(--color-background-white);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Tipografia */
+        h1, h2, h3, h4 {
+            color: var(--color-text-dark);
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.0em; }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.2em; }
+
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        a { color: var(--color-primary-red); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Header Fixo */
+        .site-header {
+            background-color: var(--color-background-white);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .site-header .logo img { max-height: 35px; display: block; }
+        .site-header nav { flex-grow: 1; text-align: center; }
+        .site-header nav ul { list-style: none; display: inline-flex; padding: 0; }
+        .site-header nav ul li { margin: 0; }
+        .site-header nav ul li a {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--color-text-dark);
+            padding: 25px 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .site-header nav ul li a:hover { color: var(--color-primary-red); text-decoration: none; }
+
+        .header-actions { display: flex; align-items: center; }
+        .header-social-icons { margin-right: 20px; display: flex; align-items: center; }
+        .header-social-icons a {
+            color: var(--color-text-dark);
+            margin-left: 15px;
+            font-size: 1.4em;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .header-social-icons a:hover { color: var(--color-primary-red); }
+
+        .header-actions .btn {
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-radius: 0;
+        }
+        .btn-donate {
+            background-color: var(--color-primary-red);
+            color: var(--color-text-light);
+            border: none;
+        }
+        .btn-donate:hover { background-color: var(--color-primary-red-hover); text-decoration: none; }
+
+        /* Hero Section */
+        #hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-background.jpg'); /* Lembre de trocar a imagem */
+            background-size: cover;
+            background-position: center center;
+            padding: 150px 20px;
+            text-align: left;
+            color: var(--color-text-light);
+        }
+        #hero .hero-content { max-width: 650px; }
+        #hero h1 { color: var(--color-text-light); font-size: 3.2em; margin-bottom: 0.5em; font-weight: 700; }
+        #hero .subtitle { color: rgba(255, 255, 255, 0.9); font-size: 1.3em; margin-bottom: 1.5em; font-weight: 400; }
+        .cta-button-hero {
+            display: inline-block; background: transparent; color: var(--color-text-light);
+            padding: 14px 30px; text-decoration: none; border-radius: 0;
+            font-weight: 700; font-size: 1.1em; margin-top: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 2px solid var(--color-text-light); text-transform: uppercase;
+        }
+        .cta-button-hero:hover { background-color: var(--color-text-light); color: var(--color-text-dark); text-decoration: none; }
+
+        /* Seções Gerais */
+        section { padding: 80px 0; border-bottom: 1px solid var(--color-border-light); }
+        section:last-of-type { border-bottom: none; }
+        section.alternate-bg { background-color: var(--color-background-light-gray); }
+        .section-title { text-align: center; margin-bottom: 60px; position: relative; }
+        .section-title::after {
+            content: ''; display: block; width: 50px; height: 4px;
+            background-color: var(--color-primary-red); margin: 15px auto 0;
+        }
+
+        /* Intro / Impacto Section */
+        .intro-impact-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+        .intro-text { flex: 1 1 55%; min-width: 300px; }
+        .impact-stats { flex: 1 1 35%; min-width: 250px; }
+        .impact-stats .stat-item { display: flex; align-items: center; margin-bottom: 25px; }
+        .impact-stats .stat-icon { font-size: 2.5em; color: var(--color-primary-red); margin-right: 20px; width: 50px; text-align: center; flex-shrink: 0; }
+        .impact-stats .stat-number { font-size: 2.2em; font-weight: 700; color: var(--color-text-dark); line-height: 1; }
+        .impact-stats .stat-label { font-size: 1em; color: var(--color-text-medium); }
+        .btn-outlined {
+             display: inline-block; background: transparent; color: var(--color-text-dark);
+             padding: 12px 28px; border: 2px solid var(--color-text-dark);
+             font-weight: 700; transition: background-color 0.3s, color 0.3s;
+             text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; border-radius: 0;
+         }
+        .btn-outlined:hover { background-color: var(--color-text-dark); color: var(--color-text-light); text-decoration: none; }
+
+        /* Princípios Section */
+        .principles-section { text-align: center; max-width: 700px; margin: 0 auto; }
+        .principles-section ul { list-style: none; padding: 0; margin-bottom: 30px; }
+        .principles-section li { font-size: 1.2em; margin-bottom: 10px; font-weight: 600; color: var(--color-text-dark); }
+        .principles-section li strong { color: var(--color-primary-red); font-weight: 700;}
+
+        /* O Trabalho / Serviços */
+        .work-item { display: flex; gap: 40px; align-items: center; margin-bottom: 60px; flex-wrap: wrap; }
+        .work-item:nth-child(even) { flex-direction: row-reverse; }
+        .work-image { flex: 1 1 45%; min-width: 280px;}
+        .work-image img { width: 100%; display: block; height: auto; border-radius: 4px; } /* Added radius */
+        .work-text { flex: 1 1 45%; min-width: 280px;}
+
+        /* Como Ajudar Section */
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .help-card { background-color: var(--color-background-white); border: 1px solid var(--color-border-light); padding: 0; border-radius: 4px; overflow:hidden; display: flex; flex-direction: column; }
+        .help-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .help-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .help-card h4 { color: var(--color-primary-red); margin-bottom: 15px; }
+        .help-card p { flex-grow: 1;}
+        .help-card .btn-outlined { display: block; text-align: center; margin-top: 20px; width: 100%; }
+
+
+        /* Seção de Acesso aos Grupos WhatsApp */
+        #acesso-grupos-whatsapp { background-color: var(--color-background-light-gray); }
+        #acesso-grupos-whatsapp .group-container { max-width: 900px; margin: 0 auto; padding: 20px 0; }
+        #acesso-grupos-whatsapp .group-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; }
+        #acesso-grupos-whatsapp .group-header h2 { color: var(--color-text-dark); margin-bottom: 15px; position: relative; display: inline-block; }
+         #acesso-grupos-whatsapp .group-header h2::after{ content: ''; display: block; width: 50px; height: 4px; background-color: var(--color-primary-red); margin: 10px auto 0; }
+        #acesso-grupos-whatsapp .group-header p { font-size: 1.1em; color: var(--color-text-medium); }
+
+        .group-section-title {
+            font-size: 1.6em; color: var(--color-text-dark); text-align: center;
+            margin-top: 40px; margin-bottom: 25px; padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-border-light); font-weight: 600;
+        }
+        .region-grid, .general-groups-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px; margin-bottom: 40px;
+        }
+        .region-card, .general-group-card {
+            background-color: var(--color-background-white); border: 1px solid var(--color-border-light);
+            border-radius: 4px; padding: 25px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex; flex-direction: column;
+        }
+        .region-card:hover, .general-group-card:hover {
+            transform: translateY(-4px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .region-card h3, .general-group-card h3 {
+            font-size: 1.25em; color: var(--color-primary-red); margin-top: 0; margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .region-card p, .general-group-card p {
+            font-size: 0.95em; color: var(--color-text-medium); margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .btn-whatsapp {
+            display: inline-block; background-color: var(--color-whatsapp-btn); color: white;
+            padding: 10px 18px; text-decoration: none; border-radius: 4px; font-weight: bold;
+            text-align: center; transition: background-color 0.2s ease; font-size: 0.95em;
+            margin-top: auto; align-self: flex-start;
+        }
+        .btn-whatsapp:hover { background-color: var(--color-whatsapp-btn-hover); }
+
+        /* Seção Biblioteca de Saúde */
+        #biblioteca-saude {
+            background-color: var(--color-biblioteca-bg);
+        }
+        #biblioteca-saude .filters {
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        #biblioteca-saude .filter-btn {
+             display: inline-block; background: transparent; color: var(--color-text-dark);
+             padding: 10px 20px; border: 2px solid var(--color-text-dark);
+             font-weight: 600; transition: background-color 0.3s, color 0.3s;
+             margin: 0;
+             font-size: 0.9em; letter-spacing: 0.5px; border-radius: 4px;
+        }
+        #biblioteca-saude .filter-btn:hover {
+            background-color: var(--color-text-dark);
+            color: var(--color-text-light);
+            border-color: var(--color-text-dark);
+            text-decoration: none;
+        }
+        #biblioteca-saude .external-link-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #biblioteca-saude .external-link-info p {
+            font-size: 1em;
+            color: var(--color-text-medium);
+            margin-bottom: 20px;
+        }
+        #biblioteca-saude .btn-access-library {
+            display: inline-block;
+            background-color: var(--color-biblioteca-btn);
+            color: var(--color-text-light);
+            padding: 12px 30px;
+            border-radius: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            text-decoration: none;
+        }
+        #biblioteca-saude .btn-access-library:hover {
+            background-color: var(--color-biblioteca-btn-hover);
+        }
+
+
+        /* FAQ Section */
+        #faq { background-color: var(--color-background-white); }
+        #faq .faq-accordion { max-width: 800px; margin: 0 auto; }
+        #faq .faq-item { border-bottom: 1px solid var(--color-border-light); margin-bottom: 0; border-radius: 0; box-shadow: none; border: none; }
+        #faq .faq-question {
+            padding: 20px 0; cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center;
+            font-weight: 600; color: var(--color-text-dark); font-size: 1.2em;
+        }
+        #faq .faq-question .icon {
+             font-size: 1.2em; color: var(--color-primary-red); transition: transform 0.3s ease-in-out; font-weight: bold;
+        }
+        #faq .faq-answer {
+             max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding: 0;
+        }
+        #faq .faq-answer p { font-size: 1em; color: var(--color-text-medium); padding-bottom: 20px; }
+        #faq .faq-item.active .faq-question .icon { transform: rotate(45deg); }
+        #faq .faq-item.active .faq-answer { max-height: 400px; }
+
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-footer-text);
+            padding: 60px 0 30px;
+            font-size: 14px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-column .footer-logo img { max-height: 40px; margin-bottom: 20px; display: block; }
+        .footer-column h5 { color: var(--color-text-light); margin-bottom: 15px; font-size: 16px; text-transform: uppercase; }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column ul li { margin-bottom: 10px; }
+        .footer-column ul li a { color: var(--color-footer-text); font-weight: 400; }
+        .footer-column ul li a:hover { color: var(--color-text-light); text-decoration: underline; }
+        .footer-column p { color: var(--color-footer-text); font-size: 14px; line-height: 1.7; }
+        .footer-social-icons { margin-top: 15px; }
+        .footer-social-icons a { color: var(--color-footer-text); margin-right: 18px; font-size: 1.6em; text-decoration: none; line-height: 1;}
+        .footer-social-icons a:last-child { margin-right: 0; }
+        .footer-social-icons a:hover { color: var(--color-text-light); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(204, 204, 204, 0.2);
+            font-size: 13px;
+        }
+        .footer-bottom a { color: var(--color-footer-text); }
+        .footer-bottom a:hover { color: var(--color-text-light); }
+
+        /* Responsividade */
+        @media (max-width: 1050px) {
+            .site-header nav ul li a { padding: 25px 8px; font-size: 12px; }
+        }
+        @media (max-width: 992px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; }
+            .site-header nav { display: none; }
+            .header-social-icons { margin-right: 10px; }
+            .intro-impact-section { flex-direction: column; }
+            .work-item, .work-item:nth-child(even) { flex-direction: column; }
+            .work-image, .work-text { flex-basis: 100%; }
+            .region-grid, .general-groups-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+            #biblioteca-saude .filters { display: flex; flex-direction: column; align-items: center;}
+            #biblioteca-saude .filter-btn { width: 80%; max-width: 300px; margin-bottom: 10px;}
+        }
+        @media (max-width: 767px) {
+             body { font-size: 15px; }
+             h1 { font-size: 2.1em; }
+             h2 { font-size: 1.6em; }
+             section { padding: 60px 0; }
+             #hero { padding: 100px 15px; text-align: center;}
+             #hero .hero-content { max-width: 100%; }
+             .impact-stats .stat-item { flex-direction: column; text-align: center; }
+             .impact-stats .stat-icon { margin-right: 0; margin-bottom: 5px;}
+             .region-grid, .general-groups-grid { grid-template-columns: 1fr; }
+             .region-card p, .general-group-card p { min-height: auto; }
+             .footer-grid { grid-template-columns: 1fr; text-align: center; }
+             .footer-column ul { padding-left: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="#hero" class="logo">
+                 <img src="images/logo-telessaude.png" alt="Telessaúde Missionária Logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#biblioteca-saude">Biblioteca de Saúde</a></li>
+                    <li><a href="#ajudar">Como Ajudar</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="header-social-icons">
+                    <a href="https://www.instagram.com/missionarymedicalcare/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/playlist?list=PL6JIF2YBc-BzT25UX_rTZg1bvDJGMCZV6&si=-N0aRxvUXzWDbPd7" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                <a href="http://link.mercadopago.com.br/telesaudemissionaria" target="_blank" class="btn btn-donate">DOAR</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Saúde e Esperança Através da Telessaúde no Campo Missionário</h1>
+                    <p class="subtitle">Conectamos missionários a voluntários da saúde para cuidado médico, emocional e espiritual, onde quer que a missão os leve.</p>
+                    <a href="https://wa.me/59173346906" target="_blank" class="cta-button-hero">Precisa de Orientação Médica?</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="intro-impact-section alternate-bg">
+            <div class="container">
+                <div class="intro-impact-section">
+                    <div class="intro-text">
+                         <h2>Cuidado Independente e Imparcial Levado Aonde é Mais Necessário</h2>
+                         <p>A Telessaúde Missionária, formada por voluntários, cuida de missionários e suas famílias impactados por desafios de saúde em locais remotos, conflitos, ou exclusão do sistema de saúde, inspirados pelo amor cristão.</p>
+                         <p>Oferecemos um suporte vital para que possam continuar seu chamado com saúde e paz.</p>
+                         <a href="#principios" class="btn-outlined">Nossos Princípios</a>
+                     </div>
+                     <div class="impact-stats">
+                         <div class="stat-item">
+                             <span class="stat-icon">🌍</span>
+                             <div>
+                                 <div class="stat-number">5+</div>
+                                 <div class="stat-label">Continentes Alcançados</div>
+                             </div>
+                         </div>
+                         <div class="stat-item">
+                              <span class="stat-icon">🧑‍⚕️</span>
+                             <div>
+                                 <div class="stat-number">100+</div>
+                                 <div class="stat-label">Profissionais Voluntários</div>
+                             </div>
+                         </div>
+                         <div class="stat-item">
+                              <span class="stat-icon">❤️</span>
+                             <div>
+                                 <div class="stat-number">100%</div>
+                                 <div class="stat-label">Foco no Cuidado Missionário</div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testemunhos">
+             <div class="container">
+                 <h2 class="section-title">Histórias de Cuidado e Impacto</h2>
+                 <div class="testimonial">
+                     <p>"A missionária no Camboja, veio ao Brasil para exames médicos, mas não conseguiu consulta a tempo... Com essa assistência, a missionária sentiu-se mais tranquila para continuar sua missão com confiança e paz."</p>
+                     <p class="author" style="clear: left;">- Missionário na Ásia (anonimizado)</p>
+                 </div>
+             </div>
+        </section>
+
+
+        <section id="principios" class="principles-section alternate-bg">
+             <div class="container">
+                 <h2 class="section-title">Os Princípios Que Nos Movem</h2>
+                 <ul>
+                    <li>Somos guiados pela <strong>ética médica universal</strong> e pelos <strong>princípios cristãos</strong> de cuidado.</li>
+                    <li>Somos comprometidos em <strong>testemunhar</strong> as necessidades e realidades do campo.</li>
+                    <li>Somos <strong>transparentes</strong> e responsáveis em nossa gestão e ações.</li>
+                    <li>Somos comprometidos com a <strong>diversidade</strong>, <strong>equidade</strong> e <strong>inclusão</strong>.</li>
+                    <li>Somos <strong>independentes</strong>, <strong>imparciais</strong> e <strong>neutros</strong> no cuidado oferecido.</li>
+                 </ul>
+                 <a href="#sobre" class="btn-outlined">Saiba Mais Sobre Nós</a>
+            </div>
+        </section>
+
+        <section id="servicos">
+            <div class="container">
+                <h2 class="section-title">Cuidado Médico Onde é Mais Necessário</h2>
+
+                <div class="work-item">
+                    <div class="work-image">
+                        <!-- IMAGEM Consultas Médicas Online -->
+                        <img src="images/Consultas Médicas Online.png" alt="Ilustração de Consultas Médicas Online">
+                    </div>
+                    <div class="work-text">
+                        <h3>Consultas Médicas Online</h3>
+                        <p>Nossas equipes de voluntários tratam uma ampla gama de necessidades médicas, desde orientação sobre doenças comuns até apoio em condições crônicas e emergências (dentro das limitações da telessaúde).</p>
+                        <a href="#como-funciona" class="btn-outlined">Como Funciona</a>
+                    </div>
+                </div>
+
+                <div class="work-item">
+                     <div class="work-image">
+                        <!-- IMAGEM Apoio Emocional -->
+                        <img src="images/Apoio Emocional.jpg" alt="Ilustração de Apoio Emocional e Espiritual">
+                    </div>
+                    <div class="work-text">
+                        <h3>Apoio Emocional e Espiritual</h3>
+                        <p>Oferecemos aconselhamento psicológico e suporte espiritual para lidar com os desafios únicos da vida missionária, como estresse, adaptação cultural e solidão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="biblioteca-saude" class="alternate-bg">
+            <div class="container">
+                <h2 class="section-title">Biblioteca de Saúde para Missionários</h2>
+                <p style="text-align: center; max-width: 700px; margin-left:auto; margin-right:auto; margin-top: -40px; margin-bottom: 40px;">
+                    Acesse informações confiáveis para cuidar da sua saúde e da sua família no campo missionário.
+                    Explore os tópicos abaixo ou acesse o conteúdo completo do MSD Manuals.
+                </p>
+                <div class="filters">
+                    <a href="https://www.msdmanuals.com/pt/casa/emerg%C3%AAncias-e-les%C3%B5es" target="_blank" class="filter-btn">Emergências</a>
+                    <a href="https://www.msdmanuals.com/pt/casa/healthy-living" target="_blank" class="filter-btn">Viver com Saúde</a>
+                    <a href="https://www.msdmanuals.com/pt/casa/symptoms" target="_blank" class="filter-btn">Sintomas</a>
+                    <a href="https://www.msdmanuals.com/pt/casa/pages-with-widgets/v%C3%ADdeos?mode=list" target="_blank" class="filter-btn">Vídeos de Saúde</a>
+                    <a href="https://www.msdmanuals.com/pt/casa/health-topics" target="_blank" class="filter-btn">Tópicos de Saúde</a>
+                </div>
+                <div class="external-link-info">
+                    <p>Você será redirecionado(a) para o MSD Manuals (Versão para o Público Geral), uma fonte externa de informações médicas confiáveis.</p>
+                    <a href="https://www.msdmanuals.com/pt/casa" target="_blank" class="btn btn-access-library">Acessar MSD Manuals</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="acesso-grupos-whatsapp">
+            <div class="group-container">
+                <header class="group-header">
+                    <h2>Conecte-se aos Nossos Grupos de Apoio</h2>
+                    <p>Encontre sua comunidade! Selecione sua região ou grupo de interesse para acessar via WhatsApp.</p>
+                </header>
+
+                <h3 class="group-section-title">Grupos Regionais</h3>
+                <div class="region-grid">
+                    <div class="region-card"><h3>🇪🇺 EUROPA</h3><p>Para missionários na Europa Ocidental, Oriental e Leste Europeu.</p><a href="https://chat.whatsapp.com/HRFjmsSMGEU0ziJxmNp26r" class="btn-whatsapp" target="_blank">Acessar Grupo</a></div>
+                    <div class="region-card"><h3>🌊 OCEANIA</h3><p>Conectando obreiros na Austrália, Nova Zelândia e ilhas do Pacífico.</p><a href="https://chat.whatsapp.com/I7M9m6ksG3UEW1i61nesvW" class="btn-whatsapp" target="_blank">Acessar Grupo</a></div>
+                    <div class="region-card"><h3>🌍 ÁFRICA</h3><p>Apoio para missionários servindo em todo o continente africano.</p><a href="https://chat.whatsapp.com/IzVCazekGkr4o8m1ORw1P4" class="btn-whatsapp" target="_blank">Acessar Grupo</a></div>
+                    <div class="region-card"><h3>🌎 AMÉRICAS</h3><p>Unindo missionários que atuam na América do Norte, Central e do Sul.</p><a href="https://chat.whatsapp.com/LXHpv55z3zCB4hM5ZJLZu0" class="btn-whatsapp" target="_blank">Acessar Grupo</a></div>
+                    <div class="region-card"><h3>🌏 ÁSIA</h3><p>Comunidade para aqueles que servem desde o Oriente Médio ao Sudeste Asiático.</p><a href="https://chat.whatsapp.com/EB966Ntfcfv7xgAnPMBKsE" class="btn-whatsapp" target="_blank">Acessar Grupo</a></div>
+                </div>
+
+                <h3 class="group-section-title">Outros Grupos de Interesse</h3>
+                <div class="general-groups-grid">
+                     <div class="general-group-card"><h3>🌐 REDE GLOBAL</h3><p>Ponto de encontro para todos os missionários trocarem experiências e orações.</p><a href="https://chat.whatsapp.com/GgnjqfSTEHZ2RNAgYN6KtD" class="btn-whatsapp" target="_blank">Acessar Rede</a></div>
+                     <div class="general-group-card"><h3>💡 HEALTHTECH</h3><p>Discussão sobre inovações em tecnologia para a telessaúde missionária.</p><a href="https://chat.whatsapp.com/LRP4EAKBfm5CpI5vWosqe6" class="btn-whatsapp" target="_blank">Acessar Grupo</a></div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="ajudar" class="alternate-bg">
+            <div class="container">
+                <h2 class="section-title">Como Você Pode Ajudar</h2>
+                <p style="text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; margin-top: -40px; margin-bottom: 50px;">Somos um movimento sustentado por voluntários e doadores. Sua participação é vital para continuarmos oferecendo cuidado.</p>
+                <div class="help-grid">
+                    <div class="help-card">
+                         <!-- IMAGEM Voluntariado -->
+                         <img src="images/VOLUNTARIADO.jpeg" alt="Imagem sobre Voluntariado na Telessaúde Missionária">
+                        <div class="help-card-content">
+                            <h4>Seja um Voluntário</h4>
+                            <p>Profissionais de saúde, TI, tradutores e outros. Doe seu tempo e talento para apoiar missionários.</p>
+                            <a href="https://wa.me/59173346906" target="_blank" class="btn-outlined">Quero Ser Voluntário</a>
+                        </div>
+                    </div>
+                     <div class="help-card">
+                         <!-- IMAGEM Doação -->
+                         <img src="images/doaçao.jpeg" alt="Imagem representando Doação">
+                        <div class="help-card-content">
+                            <h4>Faça uma Doação</h4>
+                            <p>Sua contribuição financeira nos ajuda a manter a estrutura e expandir o alcance do cuidado gratuito.</p>
+                             <a href="http://link.mercadopago.com.br/telesaudemissionaria" target="_blank" class="btn-outlined">Doar Agora (Mercado Pago)</a>
+                        </div>
+                    </div>
+                     <div class="help-card">
+                         <!-- IMAGEM Interceda -->
+                         <img src="images/interceda.jpg" alt="Imagem representando Intercessão e Oração">
+                        <div class="help-card-content">
+                            <h4>Interceda Conosco</h4>
+                            <p>A oração é fundamental. Ore pelos missionários, pelos voluntários e pela sustentabilidade deste ministério.</p>
+                            <a href="#contato" class="btn-outlined">Receber Pedidos de Oração</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="faq">
+            <div class="container">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <div class="faq-accordion">
+                     <div class="faq-item">
+                        <div class="faq-question">1. O que é a Telessaúde Missionária? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>É uma iniciativa que conecta missionários em locais remotos com profissionais de saúde voluntários, oferecendo cuidados médicos, emocionais e espirituais através da tecnologia.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">2. Para quem é este serviço? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>É para missionários cristãos e suas famílias que servem em áreas remotas ou com pouco acesso a serviços de saúde.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">3. Que tipo de cuidados oferece? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>Oferece consultas médicas online, apoio emocional e psicológico, suporte espiritual e orientações de saúde.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">4. Como funciona o atendimento? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>O missionário entra em contato pelo grupo regional de WhatsApp (veja seção 'Nossos Grupos'), a equipe de enfermagem faz uma triagem e agenda uma consulta online com um profissional de saúde.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">5. É gratuito? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>Sim, o serviço de teleorientação e aconselhamento é gratuito para os missionários, sustentado por doações e voluntariado.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">6. Quem são os profissionais de saúde? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>São médicos, enfermeiros, psicólogos e outros profissionais voluntários que doam seu tempo e conhecimento.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">7. Como a Telessaúde Missionária protege meus dados? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>Utiliza plataformas seguras e segue as leis de proteção de dados para garantir a privacidade e confidencialidade das informações.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">8. Como posso apoiar? <span class="icon">+</span></div>
+                        <div class="faq-answer"><p>Você pode apoiar como voluntário profissional, fazendo doações para sustentar o projeto, ou intercedendo em oração por este ministério e pelos missionários.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" id="contato">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                     <div class="footer-logo">
+                         <img src="images/logo-telessaude-branco.png" alt="Telessaúde Missionária Logo Rodapé">
+                     </div>
+                     <p>Levando saúde e esperança aos missionários nos lugares mais remotos.</p>
+                      <div class="footer-social-icons">
+                          <a href="https://www.instagram.com/missionarymedicalcare/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                          <a href="https://youtube.com/playlist?list=PL6JIF2YBc-BzT25UX_rTZg1bvDJGMCZV6&si=-N0aRxvUXzWDbPd7" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                          <a href="https://wa.me/59173346906" target="_blank" title="WhatsApp Info"><i class="fa-brands fa-whatsapp"></i></a>
+                      </div>
+                </div>
+                 <div class="footer-column">
+                    <h5>A Telessaúde</h5>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#principios">Nossos Princípios</a></li>
+                        <li><a href="#servicos">Nossos Serviços</a></li>
+                        <li><a href="#biblioteca-saude">Biblioteca de Saúde</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-column">
+                    <h5>Envolva-se</h5>
+                    <ul>
+                        <li><a href="#ajudar">Como Ajudar</a></li>
+                        <li><a href="https://wa.me/59173346906" target="_blank">Seja Voluntário</a></li>
+                        <li><a href="http://link.mercadopago.com.br/telesaudemissionaria" target="_blank">Doe Agora</a></li>
+                        <li><a href="#acesso-grupos-whatsapp">Acesse Nossos Grupos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <p><strong>Informações Gerais:</strong><br>missionarymedicalcare@gmail.com</p>
+                    <p><strong>WhatsApp (Info):</strong><br><a href="https://wa.me/59173346906" target="_blank">+591 7334 6906</a> (Samuel)</p>
+                    <p><a href="link-para-politica-privacidade.html">Política de Privacidade</a></p>
+                 </div>
+            </div>
+            <div class="footer-bottom">
+                © <span id="currentYear"></span> Telessaúde Missionária. Iniciativa da Missionary Medical Care. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Script para FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => {
+                   if (i !== item) i.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
